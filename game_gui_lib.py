@@ -80,7 +80,7 @@ class BrickGameFrame(AnimatedGameFrame):
 		self.ball = Ball(canvas_width // 2, canvas_height // 2, 10, 'white')
 		self.paddle = Paddle(canvas_width // 2 - 50, canvas_height - 50, 100, 10, 'white', canvas_width)
 		self.bricks = []
-		for i in range(10):
+		for i in range(2):
 			for j in range(5):
 				brick = Brick(i * 80 + 10, j * 30 + 50, 70, 20, f'#{randint(0, 0xFFFFFF):06x}')
 				self.bricks.append(brick)
@@ -140,6 +140,9 @@ class BrickGameFrame(AnimatedGameFrame):
 	
 	def speed_up(self,evt):
 		pass
+		#speed up ball
+		#speed up paddle
+
 		
 
 		
@@ -161,13 +164,12 @@ class BrickGameFrame(AnimatedGameFrame):
 			self.paddle.move_right()
 
 
-
-	
 	def update(self):
 		super().update()
 		for brick in self.bricks:
 			if brick.check_collision(self.ball):
 				self.points += 10
+				self.bricks.remove(brick)
 		# Check if the ball hits the bottom edge
 		if self.ball.y + self.ball.radius >= self.canvas_height:
 			self.lives -= 1
@@ -193,12 +195,13 @@ class BrickGameFrame(AnimatedGameFrame):
 		# Check if the ball hits the top edge
 		if self.ball.y - self.ball.radius <= 0:
 			self.ball.dy *= -1
-
-
-		# Check if the ball hits the paddle
-	    # if self.ball.y - self.ball.radius <= 0 or self.ball.check_collision(self.paddle):
-	    #     self.ball.dy *= -1
-
+		#if bricks are all gone then game over
+		if len(self.bricks) == 0:
+			self.gameover = True
+			self.stop()
+			self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2,
+									font=("Comic Sans MS", self.game_over_message_font_size),
+									text=f'You Win!', fill='white')
 
 	# Check if the ball falls off the bottom of the frame
 		#check for intersection/collision
