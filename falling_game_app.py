@@ -6,7 +6,7 @@ from spritelib import *
 
 
 root = Tk()
-game = FallingObjectGameFrame(root)
+game = BrickGameFrame(root)
 game.pack()
 
 game.animate()

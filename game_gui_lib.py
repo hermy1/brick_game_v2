@@ -1,9 +1,8 @@
 from __future__ import annotations
-
 from time import time_ns
-
 from imagehelper import *
 from spritelib import *
+from game_lib import *
 
 
 class AnimatedGameFrame(Frame):
@@ -54,11 +53,11 @@ class AnimatedGameFrame(Frame):
 			self.draw()
 			root.after(self.delay_time, self.animate)
 
-	# def get_position(self,sprite: Sprite):
-	# 	return print(self.canvas.coords(sprite.x))
 
 
-class FallingObjectGameFrame(AnimatedGameFrame):
+
+
+class BrickGameFrame(AnimatedGameFrame):
 	def __init__(self, master=None, delay_time: int = 8, canvas_width: int = 800,
 				 canvas_height: int = 600, canvas_bg: str = 'white', paused: bool = False):
 		super().__init__(master, delay_time, canvas_width, canvas_height, canvas_bg, paused)
@@ -75,18 +74,22 @@ class FallingObjectGameFrame(AnimatedGameFrame):
 	
 		self.bg_sprite = Sprite(0,0,canvas_width,canvas_height,image=self.bg_image)
 		self.bg_sprite.draw(self.canvas)
+
+
 		self.hero = AnimatedHorizontalMovingSprite(self.player_images['Left'],self.player_images['Right'],
 												   self.canvas_width//2,self.canvas_height - 50,border_width=0)
 		self.hero.draw(self.canvas)
 		self.coins = AnimatedRandomFallingObjects(self.coin_images,bottom_limit=750)
+
 		
 		self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2,
 								font=("Comic Sans MS", self.start_game_message_font_size),
 								text=self.start_game_message, fill='white')
+		self.ball = Ball(canvas=self,x=250,y=250,radius=10,direction=[1,-1],speed=5)
 		
 		
-		self.drawables = [self.bg_sprite,self.hero, self.coins]
-		self.updateables = [self.hero, self.coins]
+		self.drawables = [self.bg_sprite,self.hero, self.coins,self.ball]
+		self.updateables = [self.hero, self.coins,self.ball]
 		
 		
 		
