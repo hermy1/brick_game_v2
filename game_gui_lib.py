@@ -54,8 +54,8 @@ class AnimatedGameFrame(Frame):
 			self.draw()
 			root.after(self.delay_time, self.animate)
 
-	def get_position(self,sprite: Sprite):
-		return print(self.canvas.winfo_x(sprite.x), self.canvas.winfo_y(sprite.y))
+	# def get_position(self,sprite: Sprite):
+	# 	return print(self.canvas.coords(sprite.x))
 
 
 class FallingObjectGameFrame(AnimatedGameFrame):
@@ -171,7 +171,7 @@ class FallingObjectGameFrame(AnimatedGameFrame):
 				
 		intersections = self.coins.intersects(self.hero.sprite.bbox())
 		self.points += len(intersections)
-		self.get_position(self.hero.sprite)
+		#self.get_position(self.hero.sprite)
 		for obj in intersections:
 			obj.reset_position()
 		for coin in self.coins.objects:
