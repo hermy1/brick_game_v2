@@ -70,10 +70,10 @@ class Paddle:
         canvas.create_rectangle(self.x, self.y, self.x + self.width, self.y + self.height, fill=self.color, outline='white')
 
     def move_left(self):
-        self.x = max(self.x - 40, 0)
+        self.x = max(self.x - 100, 0)
 
     def move_right(self):
-        self.x = min(self.x + 40, self.canvas_width - self.width)
+        self.x = min(self.x + 100, self.canvas_width - self.width)
 
 
 

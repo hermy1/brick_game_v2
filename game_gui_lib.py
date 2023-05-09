@@ -80,7 +80,7 @@ class BrickGameFrame(AnimatedGameFrame):
 		self.ball = Ball(canvas_width // 2, canvas_height // 2, 10, 'white')
 		self.paddle = Paddle(canvas_width // 2 - 50, canvas_height - 50, 100, 10, 'white', canvas_width)
 		self.bricks = []
-		for i in range(2):
+		for i in range(10):
 			for j in range(5):
 				brick = Brick(i * 80 + 10, j * 30 + 50, 70, 20, f'#{randint(0, 0xFFFFFF):06x}')
 				self.bricks.append(brick)
@@ -106,9 +106,7 @@ class BrickGameFrame(AnimatedGameFrame):
 			self.root.bind('n', self.quit)
 		
 	def load_assets(self):
-		self.images = ImageHelper.slice_to_list("images/alien.png", 4, 4, 50, 50)
-
-		self.bg_image = ImageHelper.get_sized_image('images/moon_bg.jpg',self.canvas_width,self.canvas_height)
+		self.bg_image = ImageHelper.get_sized_image('images/gamebg2.png',self.canvas_width,self.canvas_height)
 		
 	def quit(self,evt=None):
 		self.root.quit()
@@ -174,20 +172,15 @@ class BrickGameFrame(AnimatedGameFrame):
 		if self.ball.y + self.ball.radius >= self.canvas_height:
 			self.lives -= 1
 			self.ball.reset()
-			# self.paddle.reset()
-			if self.lives == 0:
-				self.gameover = True
-				self.stop()
-				self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2,
-										font=("Comic Sans MS", self.game_over_message_font_size),
-										text=f'Game Over', fill='white')
 
+		#avoid ball getting stuck in the straight line loop
+		if self.ball.dx == 0:
+			self.ball.dx = 1
 
 		#check if the ball hits the paddle
 		if self.ball.check_collision(self.paddle):
 			self.ball.dy *= -1
 			self.ball.y = self.paddle.y - self.ball.radius
-
 
 		# Check if the ball hits the left or right edge
 		if self.ball.x + self.ball.radius >= self.canvas_width or self.ball.x - self.ball.radius <= 0:
@@ -195,29 +188,31 @@ class BrickGameFrame(AnimatedGameFrame):
 		# Check if the ball hits the top edge
 		if self.ball.y - self.ball.radius <= 0:
 			self.ball.dy *= -1
-		#if bricks are all gone then game over
-		if len(self.bricks) == 0:
-			self.gameover = True
-			self.stop()
-			self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2,
-									font=("Comic Sans MS", self.game_over_message_font_size),
-									text=f'You Win!', fill='white')
 
-	# Check if the ball falls off the bottom of the frame
-		#check for intersection/collision
-		#reduce lives when the player looses
-		#reset ball position etc
-					
 					
 	def draw(self):
 		super().draw()
 		self.canvas.create_text(25,10,font=("Comic Sans MS",18),text=f'Lives: {self.lives}',anchor="nw",fill='white')
 		self.canvas.create_text(775, 10, font=("Comic Sans MS", 18), text=f'Points: {self.points}', anchor="ne",fill='white')
-		if self.gameover:
+		#when you win
+		if len(self.bricks) == 0:
+			print('you win')
+			self.gameover = True
+			self.stop()
 			self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2,
 									font=("Comic Sans MS", self.game_over_message_font_size),
-									text=f'Game Over',fill='white')
-			self.canvas.create_text(self.canvas_width//2, self.canvas_height//2 + 100,
+									text=f'You Won!', fill='white')
+			self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2 + 100,
+									font=("Comic Sans MS", self.game_over_message_font_size // 2),
+									text="Play Again (y/n)?", fill='white')
+		#lives lost
+		if self.lives == 0:
+			print('you lost')
+			self.gameover = True
+			self.stop()
+			self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2,
+									font=("Comic Sans MS", self.game_over_message_font_size),
+									text=f'You Lost', fill='white')
+			self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2 + 100,
 									font=("Comic Sans MS",self.game_over_message_font_size//2),
 									text="Play Again (y/n)?",fill='white')
-			self.stop()

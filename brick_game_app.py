@@ -6,6 +6,7 @@ from spritelib import *
 
 
 root = Tk()
+root.title('Brick Game')
 game = BrickGameFrame(root)
 game.pack()
 
