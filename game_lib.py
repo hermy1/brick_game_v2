@@ -15,8 +15,8 @@ class Brick:
         if (ball.x + ball.radius > self.x and ball.x - ball.radius < self.x + self.width and
                 ball.y + ball.radius > self.y and ball.y - ball.radius < self.y + self.height):
             # collision detected
-            ball.dy *= -1  # reverse y-direction of ball
-            self.x = -1000  # move brick off screen
+            ball.dy *= -1
+            self.x = -1000
             self.y = -1000
             return True
         return False
@@ -38,11 +38,6 @@ class Ball:
     def update(self, dt):
         self.x += self.dx
         self.y += self.dy
-        # Check if the ball hits the left or right edge
-        # Check if the ball hits the top edge
-        # Check if the ball hits the paddle
-
-        # Check if the ball falls off the bottom of the frame
 
     def reset(self):
         self.x = 300
@@ -64,7 +59,7 @@ class Paddle:
         self.height = height
         self.color = color
         self.canvas_width = canvas_width
-        self.ball = None
+
 
     def draw(self, canvas):
         canvas.create_rectangle(self.x, self.y, self.x + self.width, self.y + self.height, fill=self.color, outline='white')
@@ -74,16 +69,5 @@ class Paddle:
 
     def move_right(self):
         self.x = min(self.x + 100, self.canvas_width - self.width)
-
-
-
-
-
-
-    # def reset(self):
-    #     self.x = 300
-    #     self.y = 300
-    #     self.dx = randint(-5, 5)
-    #     self.dy = -5
 
 

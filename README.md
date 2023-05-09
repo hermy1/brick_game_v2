@@ -1,46 +1,40 @@
 # Brick Breaker Game
+<img src="./images/brick.jpg" width="400"/>
 
 ## Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
+
 
 ## About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Brick Game, is a single player game. The plot of the game is that the player moves the paddle that acts as a base for the ball to bounce on and break the bricks. The player has to break all the bricks in order to win the game.
 
 ## Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+Clone the project and run the brick_breaker.py file.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
+You need to have python 3.10 installed on your system. You can download it from [here](https://www.python.org/downloads/).
 
 ```
-Give examples
+python --version
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
+You'll need to install the following library in order to run the game.
 
 ```
-Give the example
+pip install Pillow
 ```
 
-And repeat
 
-```
-until finished
-```
 
-End with an example of getting some data out of the system or using it for a little demo.
 
 ## Usage <a name = "usage"></a>
 
-Add notes about how to use the system.
+this runs on all platforms as long as you have python installed.

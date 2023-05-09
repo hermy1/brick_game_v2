@@ -86,11 +86,12 @@ class BrickGameFrame(AnimatedGameFrame):
 				self.bricks.append(brick)
 
 		self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2,
+								font=("Comic Sans MS", self.game_over_message_font_size),
+								text=f'BRICK GAME', fill='white')
+		self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2 + 100,
 								font=("Comic Sans MS", self.start_game_message_font_size),
 								text=self.start_game_message, fill='white')
 
-		
-		#add items to canvas
 		self.drawables = [self.bg_sprite,self.paddle, self.ball,*self.bricks]
 		self.updateables = [self.ball]
 
@@ -131,7 +132,6 @@ class BrickGameFrame(AnimatedGameFrame):
 		self.bg_sprite.draw(self.canvas)
 
 
-		
 		self.canvas.create_text(self.canvas_width // 2, self.canvas_height // 2,
 								font=("Comic Sans MS", self.start_game_message_font_size),
 								text=f'Press Left/Right\nArrows to Begin', fill='white')
@@ -140,9 +140,6 @@ class BrickGameFrame(AnimatedGameFrame):
 		pass
 		#speed up ball
 		#speed up paddle
-
-		
-
 		
 	def reduce_speed(self,evt):
 		pass
