@@ -1,5 +1,5 @@
 from tkinter import *
-from PIL import Image, ImageTk, ImageOps
+from PIL import Image, ImageTk, ImageOps, ImageDraw
 import os
 
 
@@ -79,3 +79,7 @@ class ImageHelper:
             image = cls.get_sized_image('{}/{}.{}'.format(file_path, i, extension), width, height)
             images.append(image)
         return images
+
+
+
+

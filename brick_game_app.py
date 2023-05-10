@@ -5,11 +5,13 @@ from spritelib import *
 
 
 
-root = Tk()
-root.title('Brick Game')
-game = BrickGameFrame(root)
-game.pack()
+# root = Tk()
+# root.title('Brick Game')
+# game = BrickGameFrame(root)
+# game.pack()
+#
+# game.animate()
 
-game.animate()
 
+root = MyApp()
 root.mainloop()
